@@ -1,0 +1,2 @@
+# AHKlicker
+AutoHotKey Minecraft Autoclicker
