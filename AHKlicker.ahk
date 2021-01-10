@@ -1,4 +1,4 @@
-﻿;Start commands
+;Start commands
 
 #NoEnv
 #InstallMouseHook
@@ -35,6 +35,7 @@ Var := "
         Autoclicker ON/OFF - ALT
           Autopotion ON/OFF - X
          Autopot activation - V
+      Block breaking - Hold CAPSLOCK
 
             -- Keybinds --
 
@@ -49,16 +50,18 @@ Gui, Color, Black
 
 ;Clicker
 
+#if !GetKeyState("CapsLock", "P")
 *$LButton::
 While GetKeyState("LButton", "P")
+if !getkeystate("CapsLock", "P")
 {
 Click down
 Click up
-Random, slepp, 35, 55
+Random, slepp, 28, 40
 Sleep %slepp%
 
-Random, spike, 120, 210
-if (slepp = 100)
+Random, spike, 34, 90
+if (slepp = 30)
 Sleep %spike%
 }
 return
@@ -69,28 +72,13 @@ Alt::Hotkey, $*LButton, Toggle ;Toggles the autoclicker by pressint ALT key
 ;Autopotion
 
 ~$*v::
- key++
- if key = 3
-    Send, {3}{RButton}
-
- else if key = 4
-    Send, {4}{RButton}
-
- else if key = 5
-    Send, {5}{RButton}
- 
- else if key = 6
-    Send, {6}{RButton}
-
- else if key = 7
-    Send, {7}{RButton}
-
- else if key = 8
- {
-    Send, {8}{RButton}
-    key = 2                   
- }
+ pokey++
+ if (pokey >= 3)
+    Send, %pokey%{RButton}
+ if (pokey = 8)
+    pokey :=2
 return
+~$*e::pokey := 2
 
 ~$*x::Hotkey, $*v, Toggle ;Toggles the autopotion by pressing V key
 
